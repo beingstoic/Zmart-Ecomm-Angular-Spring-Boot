@@ -1,0 +1,72 @@
+
+<h1  class="page-section-heading text-center text-uppercase  text-dark mb-1">Update Product</h1>
+   
+<div class="row">
+    <div class="col-sm-3">
+        <img src={{product.imageUrl}}>
+    </div>
+    <div class="col-sm-8">
+        <div class="card rounded shadow border-primary" style="width: 35rem;">
+            <div class="card-body p-5 bg-white rounded">
+                <div style="width: 400px;">
+                    <form #updateForm="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="productName">Name</label>
+                            <input type="text" class="form-control" id="productName" required
+                                [(ngModel)]="product.productName" name="productName" #productName="ngModel">
+                            <small class="form-text text-muted" *ngIf="productName.touched && !productName.valid">You
+                                must enter
+                                a name</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productCategory">Category</label>
+                            <input type="text" class="form-control" id="productCategory" required
+                                [(ngModel)]="product.productCategory" name="productCategory" #productCategory="ngModel">
+                            <small class="form-text text-muted"
+                                *ngIf="productCategory.touched && !productCategory.valid">Must
+                                be under some category</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productQuantity">Quantity</label>
+                            <input type="text" class="form-control" id="productQuantity" required
+                                [(ngModel)]="product.productQuantity" name="productQuantity" #productQuantity="ngModel">
+                            <small class="form-text text-muted"
+                                *ngIf="productQuantity.touched && !productQuantity.valid">Minimum is 1</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productDescription">Description</label>
+                            <input type="text" class="form-control" id="productDescription" required
+                                [(ngModel)]="product.productDescription" name="productDescription"
+                                #productDescription="ngModel">
+                            <small class="form-text text-muted"
+                                *ngIf="productDescription.touched && !productDescription.valid">One Liner</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="unitPrice">Price</label>
+                            <input type="text" class="form-control" id="unitPrice" required
+                                [(ngModel)]="product.unitPrice" name="unitPrice" #unitPrice="ngModel">
+                            <small class="form-text text-muted" *ngIf="unitPrice.touched && !unitPrice.valid">Minimum
+                                amount is
+                                1</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imageUrl">Image URL</label>
+                            <input type="text" class="form-control" id="imageUrl" required
+                                [(ngModel)]="product.imageUrl" name="imageUrl" #imageUrl="ngModel">
+                            <small class="form-text text-muted" *ngIf="imageUrl.touched && !imageUrl.valid">Give a
+                                snapshot
+                                Url</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-success" [disabled]="!updateForm.valid">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

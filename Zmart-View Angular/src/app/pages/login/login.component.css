@@ -1,0 +1,107 @@
+.mat-card-cvr{ 
+  padding-top: 2%;
+  width:100%; text-align:center;
+  display: flex;
+  padding: 10px 80px 0 80px;
+  justify-content: center;
+  
+}
+ 
+.card-banner{
+ 
+  color: white;
+  width: 40%;
+  box-shadow: -1px 0px 5px 3px rgba(102,102,102,0.76);
+  -webkit-box-shadow: -1px 0px 5px 3px rgba(102,102,102,0.76);
+  -moz-box-shadow: -1px 0px 5px 3px rgba(102,102,102,0.76);
+}
+
+.heading-card{
+  background-color: whitesmoke;
+  padding: 10px 20px 10px 20px;
+  color: black;
+}
+
+.login-img{
+  max-width: 100%;
+  background-size: cover;
+
+}
+.example-card{ 
+  padding-top: 50px;
+  padding: 10%;
+  width: 60%;
+  position: relative;
+  border-radius: 0%;
+  box-shadow: 0px 0px 5px 3px rgba(102,102,102,0.76);
+  -webkit-box-shadow: 0px 0px 5px 3px rgba(102,102,102,0.76);
+  -moz-box-shadow: 0px 0px 5px 3px rgba(102,102,102,0.76);
+}
+
+mat-form-field {
+    width: 80%;
+}
+
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: .15;
+  overflow: hidden;
+}
+.bg-video__content {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+  mat-form-field {
+      width: 80%;
+  }
+  
+  button {
+      width:80%;
+      background-color:black;
+      color: white;
+      height: 110%;
+  }
+  
+  mat-card-title {
+      padding-left: 40%;
+  }
+  
+  .my-card {margin:0 auto; border: 1px solid lightgray;
+     text-align:center;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+
+  .loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .center-pagination{
+    width: 100%;
+    /* Firefox */
+    display: -moz-box;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+    /* Safari and Chrome */
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+  }

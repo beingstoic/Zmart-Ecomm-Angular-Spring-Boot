@@ -1,0 +1,95 @@
+<div class="mat-card-cvr">
+    <div class="card-banner">
+        <h1 class="register-heading">Looks like you're new here!</h1>
+        <span class="sub-heading">Sign up with your details to get started</span>
+    </div>
+    <mat-card class="example-card">
+        
+        <mat-card-content>
+            
+            <form class="my-form" name="form" *ngIf="!isSuccessful" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="bg-video">
+                    <video class="bg-video__content" autoplay muted loop>
+                        <source src="../../../../assets/images/video.mp4" type="video/mp4">
+                        <source src="../../../../assets/images/video.webm" type="video/webm">
+                        Your browser is not supported!
+                    </video>
+                </div>
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput type="username" name="username" [(ngModel)]="model.username" #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" minlength="3" maxlength="20" required>
+                    <mat-error *ngIf="username.invalid">
+                        <mat-error *ngIf="username.errors.required">Username is required</mat-error>
+                        <mat-error *ngIf="username.errors.minlength">Username cannot be less than 3 characters</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6">
+                    <mat-error *ngIf="password.invalid">
+                        <mat-error *ngIf="password.errors.required">Password is required</mat-error>
+                        <mat-error *ngIf="password.errors.minlength">Password cannot be less than 6 characters</mat-error>
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" maxlength="10" required>
+                    <mat-error *ngIf="firstName.invalid">
+                        <mat-error *ngIf="firstName.errors.required">First Name is required</mat-error>
+                        <mat-error *ngIf="firstName.errors.maxlength">First Name cannot have more than 10 characters</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" maxlength="10" required>
+                    <mat-error *ngIf="lastName.invalid">
+                        <mat-error *ngIf="lastName.errors.required">Last Name is required</mat-error>
+                        <mat-error *ngIf="firstName.errors.maxlength">Last Name cannot have more than 10 characters</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email>
+                    <mat-error *ngIf="email.invalid">
+                        <mat-error *ngIf="email.errors.required">Email is required</mat-error>
+                        <mat-error *ngIf="email.errors.email">Email must be a valid email address</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Mobile number</mat-label>
+                    <input matInput type="number"  name="mobile" [(ngModel)]="model.mobile" #mobile="ngModel" [ngClass]="{ 'is-invalid': f.submitted && mobile.invalid }" required minlength="10" maxlength="10" pattern="^[0-9]{10}$">
+                    <mat-error *ngIf="mobile.invalid">
+                        <mat-error *ngIf="mobile.errors.required">Mobile number is required</mat-error>
+                        <mat-error *ngIf="mobile.errors.pattern">Mobile number must contain only 10 digits</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Gender</mat-label>
+                    <mat-select name="gender" [(ngModel)]="model.gender" #gender="ngModel" >
+                        <mat-option *ngFor="let gender of genders" [value]="gender">
+                        {{gender}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-card-actions>
+                    <button mat-raised-button>REGISTER</button>
+                </mat-card-actions>
+
+                <mat-card-footer>By signing up, you agree to all our terms and conditions & data and cookies policies. "Continue only if you agree!"</mat-card-footer>
+                <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                    Signup failed!<br/>{{ errorMessage }}
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+    <br><br>
+
+</div>

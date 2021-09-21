@@ -1,0 +1,170 @@
+<div class="container w-75">
+    <div class="row " style="justify-content: center;">
+      <h3> Order Details</h3>
+    </div>
+    <div *ngIf="!loading"  class="shadow-lg  mb-5 bg-white rounded" >
+        <div class="row " style="margin-top: 1%;">
+            <div class="col-md ">
+                    <mat-card>
+                        
+                        <mat-card-content>
+                            <div class="row">
+                                <div class="col col-md-2">
+                                    <span><strong>Order Id</strong> </span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{order.orderId}}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col col-md-2">
+                                    <span><strong>Order Date</strong> </span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{order.orderDate}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-2">
+                                    <span><strong>Delivery Date</strong> </span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{order.deliveryDate}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-2">
+                                    <span><strong>Amount</strong> </span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{order.amount}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-2">
+                                    <span><strong>Payment</strong> </span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{order.paymentType}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-2">
+                                    <span><strong>Order status</strong> </span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{order.status}}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="row" >
+                                <div class="col">
+                                    <span> </span>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-title>
+                            Delivery Address
+                        </mat-card-title>
+                        <mat-card-content>
+                            <div class="row">
+                                <div class="col col-md-2">
+                                    <span><strong>Name</strong> </span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{'Rohit Agarwal'}}</span>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col col-md-2">
+                                    <span><strong>Address</strong>  </span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{order.address}}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="row" >
+                                <div class="col col-md-2">
+                                    <span><strong>Contact</strong></span>
+                                </div>
+                                <div class="col col-md-9">
+                                    <span>{{order.contact}}</span>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-title>
+                            Order Summary
+                        </mat-card-title>
+                        <mat-card-content>
+                            <div class="row" style="margin-top: 1%;" *ngFor="let item of order.orderItems; let i=index;">
+                                <div class="col">
+                                    <img class="img-fluid img-thumbnail rounded float-left" src="assets/img/product.jpg" height="100px" width="100px">
+                                </div>
+                                
+                                <div class="col float-left col-md-10" style="margin-left: 2%;"  >
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-card-content>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <span style="color: black; font-size: medium;">Name:{{item.productName}}...</span>
+                                                    </div>                         
+                                                </div>
+                                                <div class="row" style="padding-top: 1%;">
+                                                    <div class="col">
+                                                        <div><span style="color: grey;">Price: {{item.price}}</span> </div>
+                                                        <div><span style="color: grey;">Quantity: {{item.quantity}}</span></div>
+                                                    </div>
+                                                </div>
+                                            </mat-card-content>                               
+                                        </div>
+                                    </div>        
+                                </div>
+                                
+                                
+                            </div>  
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <div class="btn-grp">
+                                <button mat-button class="btn btn-outline-primary"  data-toggle="modal" data-target="#myModal"  *ngIf="order.status!='CANCELLED'"><i class="fa fa-ban" aria-hidden="true"></i>&nbsp; CANCEL</button>
+                                <button mat-button class="btn btn-outline-info float-right" ><i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;NEED HELP</button>
+                            </div>
+                        
+                        </mat-card-actions>
+                    </mat-card>
+                    
+            </div>
+        </div>
+    </div>
+    <div  *ngIf="fail">
+       <mat-card class="fail">
+         {{response.message}}
+       </mat-card>
+    </div>
+    <div  *ngIf="success">
+        <mat-card class="success">
+          {{response.message}}
+        </mat-card>
+     </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    
+    <mat-card class="modal-dialog p-0">
+        <mat-card-title class=" bg-info">
+          <h4 style="color: aliceblue; margin:1%;">Confirm Cancellation</h4>
+        </mat-card-title>
+        <mat-card-content >
+            <div style="margin-left: 2%;">
+            Are you sure you want to cancel this order?
+            </div>
+       </mat-card-content>
+        <div class="modal-footer" style=" margin-top:0%">
+          <button type="button" mat-button class="btn btn-default bg-success" data-dismiss="modal">Close</button>
+          <button type="button" mat-button class="btn btn-default bg-danger" data-dismiss="modal" (click)="cancelOrder()">Confirm</button>
+        </div>
+    </mat-card>
+   
+  </div>

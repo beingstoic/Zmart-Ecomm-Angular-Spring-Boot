@@ -1,0 +1,160 @@
+<section >
+    <div class="container " style="padding-bottom: 2rem;">
+  
+      <div style="margin-top:2rem;  margin-bottom: 2rem">
+        <h2 class="page-section-heading text-center text-uppercase text-dark mb-1">Place Order</h2>
+        <div class="divider-custom">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+        </div>
+  
+        <div style="margin-top: 5px" *ngIf="response.status"
+             class="alert alert-danger">
+          {{response.message}}
+        </div>
+  
+        <div class="center-pagination ">
+          <div *ngIf="loading" class="loading">
+            <div class="loader"></div>
+          </div>
+        </div>
+  <mat-card>
+          <div class="text-center" style="margin-top: 1rem">
+            <h3 style="text-align:left"><strong>Order Details:</strong></h3>
+            
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Sub Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of order.orderItems,let i = index">
+                  <td><img class="img-fluid img-thumbnail rounded float-left" [src]="item.imageUrl" height="50px" width="50px"></td>
+                  <td>{{item.productName}}</td>
+                  <td >{{item.quantity}}</td>
+                  <td><span>&#8377;</span> {{item.price}} </td>
+                  <td>{{item.quantity*item.price}}</td>
+                </tr>
+              </tbody>
+             
+            </table>
+            
+            <div class="total">
+              <div class="totals-item">
+                <label>Subtotal</label>
+                <div class="totals-value" id="cart-subtotal">
+                  <span>&#8377;</span>{{total}}
+                </div>
+              </div> 
+              <div class="totals-item">
+                <label>Tax (5%)</label>
+                <div class="totals-value" id="cart-tax">
+                  +<span>&#8377;</span>{{tax}}
+                </div>
+              </div>
+               <div class="totals-item">
+                  <label>Discount</label>
+                  <div class="totals-value" id="cart-discount">
+                    -<span>&#8377;</span>{{discount}}
+                  </div>
+                </div>
+                <div class="totals-item totals-item-total">
+                  <label>Payable</label>
+                  <div class="totals-value" id="cart-total">
+                    <span>&#8377;</span>{{order.amount}}
+                  </div>
+                </div>
+             
+              </div>
+            <br>
+            
+          </div>
+        <form [formGroup]="details" >
+          <div class=" align-items-center container">
+            <div class="form-group col-md-4">
+              <strong> <label for="contact">Name:</label></strong>
+                <input
+                  style="height: 40px; width:400px;"
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  id="name"
+                  name="name" 
+                  [ngClass]="{'is-invalid':(f.name.touched && f.name.dirty || submitted) && f.name.invalid}"   
+                >
+                <span class="invalid-feedback" *ngIf="(f.name.touched && f.name.dirty || submitted) && f.name.hasError('required')">
+                  Oops, please provide a name!
+                </span>
+                <span class="invalid-feedback" *ngIf="(f.name.touched && f.name.dirty || submitted) && f.name.invalid && f.contact.hasError('pattern')">
+                  Oops, please provide a name without digits and special characters!
+                </span>
+                <span class="invalid-feedback" *ngIf="(f.name.touched && f.name.dirty || submitted) && f.name.invalid && f.contact.hasError('minlength')">
+                  Oops, atleast two characters are required!
+                </span>
+                <span class="invalid-feedback" *ngIf="(f.name.touched && f.name.dirty || submitted) && f.name.invalid && f.contact.hasError('maxlength')">
+                  Oops, maximum 15 characters allowed!
+                </span>
+              </div>
+              <div class="form-group col-md-4">
+              <strong> <label for="address">Address:</label> </strong>
+                <input
+                  style="height: 40px; width:400px;"
+                  type="text"
+                  class="form-control"
+                  formControlName="address"
+                  id="address"
+                  name="address" 
+                  [ngClass]="{'is-invalid':(f.address.touched && f.address.dirty || submitted) && f.address.invalid}"   
+                >
+                <span class="invalid-feedback" *ngIf="(f.address.touched && f.address.dirty || submitted) && f.address.invalid">
+                  Oops, please provide an address!
+                </span>
+                
+              
+              </div>
+              
+              <div class="form-group col-md-4">
+                <strong> <label for="contact">Contact:</label></strong>
+                  <input
+                    style="height: 40px; width:400px;"
+                    type="number"
+                    class="form-control"
+                    formControlName="contact"
+                    id="contact"
+                    name="contact" 
+                    [ngClass]="{'is-invalid':(f.contact.touched && f.contact.dirty || submitted) && f.contact.invalid}"  
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  
+                  >
+                  <span class="invalid-feedback" *ngIf="(f.contact.touched && f.contact.dirty || submitted) && f.contact.hasError('required')">
+                    Oops, please provide a contact number!
+                  </span>
+                  <span class="invalid-feedback" *ngIf="(f.contact.touched && f.contact.dirty || submitted) && f.contact.invalid && !f.contact.hasError('required')">
+                    Oops, please provide 10 digit correct number!
+                  </span>
+                
+                </div>
+              <div class="form-group col-md-4">
+            
+                  <button mat-raised-button type="submit" class="btn-success btn" (click)="submitOrder()" >
+                    Pay and Confirm 
+                  </button>
+              </div>
+          </div>
+        </form> 
+   </mat-card>
+      </div>
+    </div>
+</section>
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="form-row">
+      
+    </div>
+</div>
+<!--''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''-->
+

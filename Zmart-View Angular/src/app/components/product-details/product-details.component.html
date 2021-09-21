@@ -1,0 +1,49 @@
+<div class="product-details">
+    <div class="product-img">
+        <img class="img-product" src={{product.imageUrl}} alt="product-img">
+    </div>
+   
+        <div class="example-card" style="width: 35rem;">
+            <header class="heading-card">
+                <h1>Product Details</h1>
+                </header>
+                <hr />
+            <div class="description-card">
+                    <section class="parent">
+                        <section class="child">
+                            <div *ngIf="product">
+                                <h1 class="title">
+                                     {{product.productName}}
+                                </h1>
+                                <p class="price">
+                                    {{product.unitPrice|currency:'INR'}}
+                                </p>
+                                
+                                <div>
+                                    <label><b>Category: </b></label> {{product.productCategory}}
+                                </div>
+                                <div>
+                                    <label><b>Description: <br></b></label> 
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti optio quidem omnis illo nihil ad beatae debitis. Voluptatem numquam placeat illum laudantium nesciunt, ipsa tempora alias voluptatum praesentium, soluta excepturi.</p>
+                                   
+
+                                    <p>5 reasons to buy from us!</p>
+                                    <ul>
+                                        <li>Guaranteed delivery within 24 working hours.</li>
+                                        <li>Shipment accross the globe</li>
+                                        <li>Seamless order experience</li>
+                                        <li>Items returnable/replaceable wihtin 30 days of purchase</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+         
+                    <br>
+                    <div class="btn-row">
+                        <button (click)="home()" class=" btnn btnn-home">Back to Home</button><br>
+                        <button (click)="addItem()" class="btnn btnn-cart">Add to cart</button>
+                    </div>
+            </div>
+        </div>
+</div>

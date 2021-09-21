@@ -1,0 +1,71 @@
+<section >
+  <div class="container" >
+    
+    <h1 class="page-section-heading text-center text-uppercase text-dark mb-0">Order History</h1>
+  
+    <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-line"></div>
+    </div>
+    
+    <div style="margin-top: 5px" *ngIf="response.status"
+         class="alert alert-danger">
+      {{response.message}}
+    </div>
+    <div class="center-pagination ">
+      <div *ngIf="loading" class="loading">
+        <div class="loader"></div>
+      </div>
+    </div>
+
+    <div *ngIf="!loading" class="row">
+      <div
+        class="column"
+        style="margin-bottom: 2rem"
+        *ngFor="let order of orderList; let i = index "
+      >
+        <mat-card class="shadow-lg  mb-5 bg-white rounded">
+        
+          <div class="text-center"><strong>Order No: {{order.orderId}}</strong></div>
+          
+          <div class="row">
+            <div class="col text-left">
+              Order Date :
+            </div>
+            <div class="col text-left">
+              {{order.orderDate}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-left">
+              Amount :
+            </div>
+            <div class="col text-left">
+              {{order.amount}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-left">
+              Status :
+            </div>
+            <div class="col text-left">
+              {{order.status}} 
+            </div>
+          </div>
+          
+          <br>
+          <div class="d-flex align-items-center justify-content-center">
+            <button mat-raised-button
+              style="margin-right: 1rem"
+              class="btn btn-primary"
+              (click)="viewOrder(order.orderId)"
+            >
+              Show
+            </button>
+          </div>
+        
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

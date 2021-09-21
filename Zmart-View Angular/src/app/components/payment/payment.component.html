@@ -1,0 +1,99 @@
+
+<div class="container " style="width: 35%; padding-bottom: 2rem;">
+    <h1  class="page-section-heading text-center text-uppercase  text-dark mb-1">Make Payment</h1>
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-line"></div>
+   </div>
+
+   <div class="center-pagination ">
+    <div *ngIf="loading" class="loading">
+      <div class="loader"></div>
+    </div>
+  </div>
+  <div style="margin-top: 5px" *ngIf="response.status"
+    class="alert alert-danger">
+    {{response.message}}
+   </div>
+   <div style="margin-top: 5px" *ngIf="success"
+    class="alert alert-success">
+    {{successMessage}}
+   </div>
+  <div *ngIf="!loading && !success && !response.status">
+      <mat-card>
+          <mat-card-content>
+             
+                <form class=""  [formGroup]="cardDetails">
+                    <div class="form-group form-row" style="margin-top: 5%;">
+                    <label class=" col-form-label col-2 " for="cardNo"><strong>Card No.</strong></label>
+                    <input class=" form-control col-9" type="number" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength=16  id="cardNo"
+                    formControlName="cardNo" [ngClass]="{'is-invalid':(f1.cardNo.touched && f1.cardNo.dirty || submitted) && f1.cardNo.invalid}"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >
+                    
+                        <span class="invalid-feedback" *ngIf="(f1.cardNo.touched && f1.cardNo.dirty || submitted) && f1.cardNo.hasError('required')">
+                            Oops, please enter card number!
+                        </span>
+                        <span class="invalid-feedback" *ngIf="(f1.cardNo.touched && f1.cardNo.dirty || submitted) && f1.cardNo.hasError('minlength')">
+                            Oops, please enter 16 digits!
+                        </span>
+                        <span class="invalid-feedback" *ngIf="(f1.cardNo.touched && f1.cardNo.dirty || submitted) && f1.cardNo.hasError('pattern')">
+                            Oops, invalid card number!
+                        </span>
+                    </div>
+
+                    <div class="row" >
+                      <div class="col-4">
+                        <div class="form-group form-row" style="margin-top: 5%;">
+                            <label class=" col-form-label col-6 " for="exmonth"><strong>Month</strong></label>
+                            <select class=" form-control col-6" type="select" placeholder="MM" maxlength=2  id="exmonth"
+                            formControlName="exmonth" [ngClass]="{'is-invalid':(f1.exmonth.touched && f1.exmonth.dirty || submitted) && f1.exmonth.invalid}" >
+                            
+                            <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                           </select>
+                            <span class="invalid-feedback" *ngIf="(f1.exmonth.touched && f1.exmonth.dirty || submitted) && f1.exmonth.invalid">
+                                Oops, please select expiry month!
+                            </span>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group form-row" style="margin-top: 5%;">
+                            <label class=" col-form-label col-6 " for="expiry"><strong>Year</strong></label>
+                            <select class=" form-control col-6" type="text" placeholder="YY" maxlength=2  id="exyear"
+                            formControlName="exyear" [ngClass]="{'is-invalid':(f1.exyear.touched && f1.exyear.dirty || submitted) && f1.exyear.invalid}" >
+                               <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                           </select>
+                            <span class="invalid-feedback" *ngIf="(f1.exyear.touched && f1.exyear.dirty || submitted) && f1.exyear.invalid">
+                                Oops, please select expiry year!
+                            </span>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group form-row" style="margin-top: 5%;">
+                            <label class=" col-form-label col-4 " for="cvv"><strong>CVV</strong></label>
+                            <input class=" form-control col-5" type="number" placeholder="CVV" maxlength=3 id="cvv" 
+                            formControlName="cvv" [ngClass]="{'is-invalid':(f1.cvv.touched && f1.cvv.dirty || submitted) && f1.cvv.invalid}"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            >
+                    
+                            <span class="invalid-feedback" *ngIf="(f1.cvv.touched && f1.cvv.dirty || submitted) && f1.cvv.hasError('required')">
+                                Oops, please enter CVV code!
+                            </span>
+                            <span class="invalid-feedback" *ngIf="(f1.cvv.touched && f1.cvv.dirty || submitted) && f1.cvv.hasError('pattern')">
+                                Oops, please enter 3 digit CVV code!
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+            
+            
+          </mat-card-content>
+          <mat-card-actions>
+              <div class="text-center mb-1">
+                 <button mat-raised-button  class="btn btn-primary" (click)="makePayment()">Pay {{'amount'}}</button>
+              </div>
+              
+          </mat-card-actions>
+      </mat-card>
+  </div>
+</div>

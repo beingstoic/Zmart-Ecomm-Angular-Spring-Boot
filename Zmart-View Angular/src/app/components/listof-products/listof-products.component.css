@@ -1,0 +1,7 @@
+body {
+    min-height: 500vh;
+  }
+
+  .col-md-12 {
+      padding-right: 50px;
+  }

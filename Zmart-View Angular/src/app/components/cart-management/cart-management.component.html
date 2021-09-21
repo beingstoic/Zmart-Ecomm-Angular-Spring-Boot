@@ -1,0 +1,160 @@
+
+<h1 ><strong>My Cart</strong> </h1>
+
+    
+
+<div class="text-center" >
+  <div class="container bg-white" style="padding-bottom: 2rem;">
+  
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Image</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td>{{item.productId}}</td>
+          <td>
+            <a [routerLink]="['/details/'+item.productId]">
+              {{item.productName}}
+            </a>
+          </td>
+          <td>
+            <a [routerLink]="['/details/'+item.productId]">
+              <img class="img-fluid img-thumbnail rounded " [src]="item.imgUrl" height="40px" width="40px">
+            </a>
+              
+          </td>
+
+          <td class="align-middle">
+            <a (click)="minusOne(item)"><button class="btn">-</button></a>
+            {{item.quantity}}
+            <a (click)="addOne(item)"> <button class="btn">+</button></a>
+          </td>
+          <td><span>&#8377;</span> {{item.price}} </td>
+          <td class="align-middle">
+            <button
+                class="remove-product"  data-toggle="modal" data-target="#myModal"
+                
+              >
+                remove
+              </button>
+              <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+              
+                  <!-- Modal content-->
+                  <div class="modal-content" >
+                    <div class="modal-header bg-dark">
+                      <h4 class="modal-title " style="color: aliceblue;">Confirm </h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" style="margin: 0;">
+                      Are you sure you want to remove this item?
+                    </div>
+                    <div class="modal-footer" style=" margin-top:0%">
+                      <button type="button" class="btn btn-default bg-danger" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-default bg-success" data-dismiss="modal" (click)="removeItem(item.productId)">Confirm</button>
+                    </div>
+                   </div>
+                </div>
+              </div>
+            <!-- <a (click)="removeItem(item.productId)">Remove</a> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div *ngIf="cartItems.length > 0; else 0" >
+      <div *ngIf="total>=2000; else noDiscount">
+        <div class="total">
+          <div class="totals-item">
+            <label>Subtotal</label>
+            <div class="totals-value" id="cart-subtotal">
+              <span>&#8377;</span>{{total}}
+            </div>
+          </div> 
+          <div class="totals-item">
+            <label>Tax (5%)</label>
+            <div class="totals-value" id="cart-tax">
+              +<span>&#8377;</span>{{tax}}
+            </div>
+          </div>
+          <div class="totals-item">
+              <label>Discount</label>
+              <div class="totals-value" id="cart-discount">
+                -<span>&#8377;</span>{{discount}}
+              </div>
+            </div>
+            <div class="totals-item totals-item-total">
+              <label>Grand Total</label>
+              <div class="totals-value" id="cart-total">
+                <span>&#8377;</span>{{discountedPrice}}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <ng-template #noDiscount>
+          <div class="total">
+            <div class="totals-item">
+              <label>Subtotal</label>
+              <div class="totals-value" id="cart-subtotal">
+                <span>&#8377;</span>{{total}}
+              </div>
+            </div>
+            <div class="totals-item">
+              <label>Tax (5%)</label>
+              <div class="totals-value" id="cart-tax">
+                +<span>&#8377;</span>{{tax}}
+              </div>
+            </div>
+            <div class="totals-item totals-item-total">
+              <label>Grand Total</label>
+              <div class="totals-value" id="cart-total">
+                <span>&#8377;</span>{{discountedPrice}}
+              </div>
+            </div>
+          </div>
+          
+        </ng-template>
+      
+      <div class="check">
+        <div class="form-group col-md-12">
+          <button  class="btn btn-primary float-right"   data-toggle="modal" data-target="#confirm">Checkout</button>
+        </div>
+      </div>  
+    </div>
+      <div class="modal fade" role="dialog" id="confirm">
+        <div class="modal-dialog">      
+          <!-- Modal content-->
+          <div class="modal-content" >
+            <div class="modal-header bg-dark">
+              <h4 class="modal-title " style="color: aliceblue;">Confirm </h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="margin: 0;">
+              Are you sure you want to checkOut?
+            </div>
+            <div class="modal-footer" style=" margin-top:0%">
+              <button type="button" class="btn btn-default bg-danger" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default bg-success" data-dismiss="modal" (click)="checkOut()">Confirm</button>
+            </div>
+           </div>
+        </div>
+      </div>
+      
+   
+    <div *ngIf="cartItems.length == 0; else 0">
+      <h1 style="color: gray;">Your cart is empty!! Shop Fast..
+      </h1>
+    </div>
+  </div>
+   
+</div>

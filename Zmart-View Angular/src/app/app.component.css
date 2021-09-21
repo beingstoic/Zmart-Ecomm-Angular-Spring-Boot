@@ -1,0 +1,65 @@
+
+body{
+  margin: 50px;
+  padding: 20px;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+#header{
+  height:20vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-logo{
+  height: 95%;
+  padding: 20px 0 20px 10px;
+ 
+
+}
+
+#zmart-logo{
+  height: 75%;
+}
+
+.header-menu{
+  padding: 10px;
+  margin-right: 30px;
+  min-width: 25vw;
+  list-style-type: none;
+  
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+.text-light{
+  font-size: 1.4em;
+}
+
+
+.menu-tray{
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-icon{
+
+   margin: 10px 20px 10px 20px;
+}
+
+.filters{
+  font-size: small;
+}
+.card, .form-control, .btn {
+border-radius: 0;
+}
+.product-btn {
+font-size: smaller;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

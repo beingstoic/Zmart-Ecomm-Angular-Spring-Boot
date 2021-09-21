@@ -1,0 +1,18 @@
+.cancelled {
+    color: red;
+}
+.placed {
+    color: green;
+}
+.fail{
+    background-color: #d44e4e;
+    color:aliceblue;
+    font-size: medium;
+    text-align: center;
+  }
+.success{
+    background-color: #3eb043;
+    color:aliceblue;
+    font-size: medium;
+    text-align: center;
+  }

@@ -1,0 +1,49 @@
+h1 {
+    padding-top: 50px;
+    text-align: center;
+    }
+
+.remove-product {
+    border: 0;
+    padding: 4px 8px;
+    background-color: #c66;
+    color: #fff;
+    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+    font-size: 12px;
+    border-radius: 3px;
+      }
+.remove-product:hover {
+    background-color: #a44;
+    }
+.check{
+    padding-top: 150px;
+    padding-bottom: 20px;
+}
+.totals-item {
+    float: right;
+    clear: both;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .totals-item .totals-value {
+    float: right;
+    width: 21%;
+    text-align: right;
+  }
+  .totals-item-total {
+    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+  }
+  .totals-item label {
+    float: left;
+    clear: both;
+    width: 79%;
+    text-align: right; 
+    color: lightslategrey;
+  }
+  #cart-discount{
+      color: darkgreen;
+  }
+
+  .total{
+      padding-right: 20px;
+  }

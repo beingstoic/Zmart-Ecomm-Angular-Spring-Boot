@@ -1,0 +1,63 @@
+<div class="mat-card-cvr">
+    <div class="card-banner">
+        <div class="heading-card">
+            <h1 class="register-heading">Login</h1>
+            <span class="sub-heading">Get access to your Orders, Wishlist and Recommendations</span>
+        </div>
+        <img src="../../../assets/images/login.jpeg" alt="login pic" class="login-img">
+    </div>
+    <div class="bg-video">
+        <video class="bg-video__content" autoplay muted loop>
+            <source src="../../../assets/images/video.mp4" type="video/mp4">
+            <source src="../../../assets/images/video.webm" type="video/webm">
+            Your browser is not supported!
+        </video>
+    </div>
+    <mat-card class="example-card">
+
+        <div class="center-pagination ">
+            <div *ngIf="loading" class="loading">
+              <div class="loader"></div>
+            </div>
+          </div>
+
+        <mat-card-content>
+            <form class="my-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" *ngIf="!isLoggedIn" #f="ngForm" novalidate>
+
+                <mat-form-field class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput type="username" name="username" class="form-control" [(ngModel)]="model.username" #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" minlength="3" required>
+                    <mat-error *ngIf="username.invalid">
+                        <mat-error *ngIf="username.errors.required">Username is required</mat-error>
+                        <mat-error *ngIf="username.errors.minlength">Username cannot be less than 3 characters</mat-error>
+                    </mat-error>
+                </mat-form-field><br>
+
+                <mat-form-field class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6">
+
+                    <mat-error *ngIf=" password.invalid">
+                        <mat-error *ngIf="password.errors.required">Password is required</mat-error>
+                        <mat-error *ngIf="password.errors.minlength">Password cannot be less than 6 characters</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-card-actions>
+                    <button mat-raised-button>LOGIN</button>
+                </mat-card-actions>
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                    Login failed: {{ errorMessage }}
+                </div>
+            </form>
+        </mat-card-content>
+        <!-- <div class="alert alert-success" *ngIf="isLoggedIn">
+            Logged in as {{ roles }}.
+        </div> -->
+        <br><br>
+    <mat-card class="my-card" *ngIf="!isLoggedIn">
+        <mat-card-content>Don't have an account already? <a matLine routerLink="/register" md-colors="::::"><b>Register Here Now!</b></a></mat-card-content>
+    </mat-card>
+    </mat-card>
+    
+</div>

@@ -1,0 +1,233 @@
+<div class="container w-75  " style="margin-top:5%;">
+    <h1 class="page-section-heading text-center text-uppercase text-dark mb-1">Search Orders</h1>
+
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-line"></div>
+   </div>
+
+   <div class="center-pagination ">
+    <div *ngIf="loading" class="loading">
+      <div class="loader"></div>
+    </div>
+  </div>
+  
+    <div style="margin-top: 5px" *ngIf="response.status"
+                    class="alert alert-danger">
+                   {{response.message}}
+    </div>
+   <div class="row " >
+    <div class="col mb-3" >
+        <mat-card class=" ">
+            <mat-card-title class="text-center " >
+                Search By User Id
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <mat-card-content >
+                <form class=""  [formGroup]="form1">
+                    <div class="form-group form-row" style="margin-top: 5%;">
+                    <label class=" col-form-label col-3 " for="userId"><strong>User Id</strong></label>
+                    <input class=" form-control col-6" type="number" placeholder="User Id"  id="userId" maxlength=5 formControlName="userId"
+                     [ngClass]="{'is-invalid':(f1.userId.touched && f1.userId.dirty || formSubmitted==1) && f1.userId.invalid}"
+                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >
+                    
+                        <span class="invalid-feedback" *ngIf="(f1.userId.touched && f1.userId.dirty || formSubmitted==1) && f1.userId.hasError('required')">
+                            Oops, please enter a user id!
+                        </span>
+                        <span class="invalid-feedback" *ngIf="(f1.userId.touched && f1.userId.dirty || formSubmitted==1) && f1.userId.hasError('maxlength')">
+                            Oops, max 5 digits allowed!
+                        </span>
+                    </div>
+                    
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="form-row ">
+                    <div class="col text-center">
+                    <button  mat-raised-button class="btn-primary " (click)="getByUserId()">search</button>
+                    </div>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col mb-3" >
+        <mat-card class=" ">
+            <mat-card-title class="text-center " >
+                Search By Order Id
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <mat-card-content >
+                <form class=""  [formGroup]="form2">
+                    <div class="form-group form-row" style="margin-top: 5%;">
+                    <label class=" col-form-label col-3 " for="orderId"><strong>Order Id</strong></label>
+                    <input class=" form-control col-6" type="number" maxlength=5 id="orderId" placeholder="Order Id"formControlName="orderId"
+                    [ngClass]="{'is-invalid':(f2.orderId.touched && f2.orderId.dirty || formSubmitted==2) && f2.orderId.invalid}"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >
+                  
+                        <span class="invalid-feedback" *ngIf="(f2.orderId.touched && f2.orderId.dirty || formSubmitted==2) && f2.orderId.invalid">
+                            Oops, please enter an order id!
+                        </span>
+                        <span class="invalid-feedback" *ngIf="(f2.orderId.touched && f2.orderId.dirty || formSubmitted==2) && f2.orderId.hasError('maxlength')">
+                            Oops, max 5 digits allowed!
+                        </span>
+                   
+                    </div>
+                    
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="form-row ">
+                    <div class="col text-center">
+                    <button  mat-raised-button class="btn-primary " (click)="getByOrderId()">search</button>
+                    </div>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col mb-3" >
+        <mat-card class=" ">
+            <mat-card-title class="text-center " >
+                Search By Order Date
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <mat-card-content >
+                <form class=""  [formGroup]="form3">
+                    <div class="form-group form-row" style="margin-top: 5%;">
+                    <label class=" col-form-label col-3 " for="orderDate"><strong>Order Date</strong></label>
+                    <input class=" form-control col-6" type="date" id="orderDate" formControlName="orderDate"
+                      [ngClass]="{'is-invalid':(f3.orderDate.touched && f3.orderDate.dirty || formSubmitted==3) && f3.orderDate.invalid}">
+                    
+                        <span class="invalid-feedback" *ngIf="(f3.orderDate.touched && f3.orderDate.dirty || formSubmitted==3) && f3.orderDate.invalid">
+                            Oops, please select a date!
+                        </span>
+                        
+                    </div>
+                    
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="form-row ">
+                    <div class="col text-center">
+                    <button  mat-raised-button class="btn-primary " (click)="getByDate()">search</button>
+                    </div>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col mb-3" >
+        <mat-card class=" ">
+            <mat-card-title class="text-center " >
+                Search By Order Status
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <mat-card-content >
+                <form class="" [formGroup]="form4" >
+                    <div class="form-group form-row" style="margin-top: 5%;">
+                    <label class=" col-form-label col-3 " for="status"><strong>Order Status</strong></label>
+                    <select class=" form-control col-6" id="status" placeholder="Order Status" formControlName="status"  
+                    [ngClass]="{'is-invalid':(f4.status.touched && f4.status.dirty || formSubmitted==4) && f4.status.invalid}" >
+                        <option value="BOOKED">BOOKED</option>
+                        <option value="DISPATCHED">DISPATCHED</option>
+                        <option value="DELIVERED">DELIVERED</option>
+                        <option value="CANCELLED">CANCELLED</option>
+                    </select>
+                    
+                    <span class="invalid-feedback" *ngIf="(f4.status.touched && f4.status.dirty || formSubmitted==4) && f4.status.invalid">
+                        Oops, please select a status!
+                    </span>
+                    
+                    </div>
+                    
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="form-row ">
+                    <div class="col text-center">
+                    <button  mat-raised-button class="btn-primary " (click)="getByStatus()">search</button>
+                    </div>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+   </div>
+  
+</div>
+<!--
+<div class="container" *ngIf="!(orderList.length==0)">
+    
+    <div>
+        <mat-card>
+            <mat-card-title class="text-center">Order List</mat-card-title>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+              
+                <table class="table" id="ordertable">
+                    <thead>
+                    <tr>
+                        <th scope="col">Order Id</th>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let order of orderList;let i=index;">
+                        <td>{{order.orderId}}</td>
+                        <td>{{order.orderDate}}</td>
+                        <td>{{order.amount}}</td>
+                        <td><span>&#8377;</span>{{order.paymentType}}</td> 
+                        <td class="align-middle">
+                           <button  mat-raised-button class="btn-primary" (click)="viewOrderDetails(i)">View</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </mat-card-content>
+            
+        </mat-card>
+    </div>
+</div>
+-->
+<div class="container" *ngIf="!(orderList.length==0)">
+    
+<div class="wrapper " >
+    
+    <table style="width: 100%;"mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        
+        <ng-container matColumnDef="orderId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><strong> OrderId </strong> </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderId}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="orderDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><strong> Order Date</strong> </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderDate}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong>Amount</strong> </th>
+        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="paymentType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><strong> Payment</strong> </th>
+        <td mat-cell *matCellDef="let element"> {{element.paymentType}} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef ><strong> Action </strong></th>
+        <td mat-cell *matCellDef="let element">  <button  mat-raised-button class="btn-primary" (click)="orderDetails(element.orderId)">View</button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <!-- Angular 8 pagination -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+  

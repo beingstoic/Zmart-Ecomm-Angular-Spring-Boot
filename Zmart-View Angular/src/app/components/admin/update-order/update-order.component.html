@@ -1,0 +1,50 @@
+<div class="container w-50" style="padding-bottom: 2rem;">
+    <h1 class="page-section-heading text-center text-uppercase text-dark mb-0">Update Order</h1>
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+      </div>
+
+      <div class="center-pagination ">
+        <div *ngIf="loading" class="loading">
+          <div class="loader"></div>
+        </div>
+      </div>
+<mat-card>
+    <mat-card-title class="text-center">Order Id: {{orderId}}</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content >
+        <form class="" [formGroup]="form4" >
+            <div class="form-group form-row" style="margin-top: 5%;">
+            <label class=" col-form-label col-3 " for="status"><strong>Order Status</strong></label>
+            <select class=" form-control col-6" id="status" placeholder="Order Status" formControlName="status"  
+            >
+                <option value="BOOKED">BOOKED</option>
+                <option value="DISPATCHED">DISPATCHED</option>
+                <option value="DELIVERED">DELIVERED</option>
+                <option value="CANCELLED">CANCELLED</option>
+            </select>
+            
+            <span class="invalid-feedback" *ngIf="(f4.status.touched && f4.status.dirty || submitted) && f4.status.invalid">
+                Oops, please select a status!
+            </span>
+            
+            </div>
+            
+        </form>
+   </mat-card-content>
+   <mat-card-actions>
+    <div class="form-row ">
+        <div class="col text-center">
+        <button  mat-raised-button class="btn-primary " (click)="updateStatus()">Update</button>
+        </div>
+    </div>
+   </mat-card-actions>
+</mat-card>
+
+    <div style="margin-top: 5px" *ngIf="response.status"
+        class="alert alert-danger">
+        {{response.message}}
+    </div>
+</div>

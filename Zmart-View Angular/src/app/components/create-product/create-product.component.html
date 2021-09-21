@@ -1,0 +1,75 @@
+<header class="text-center">
+  <h1>Add Product</h1>
+</header>
+<div class="row">
+  <div class="col-sm-3">
+    <img src={{product.imageUrl}}>
+  </div>
+  <div class="col-sm-8">
+    <div class="card rounded shadow border-primary" style="width: 35rem;">
+      <div class="card-body p-5 bg-white rounded">
+        <div [hidden]="submitted" style="width: 400px;">
+          <form #addForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="productName">Name</label>
+              <input type="text" class="form-control" id="productName" required [(ngModel)]="product.productName"
+                name="productName" #productName="ngModel">
+              <small class="form-text text-muted" *ngIf="productName.touched && !productName.valid">You must enter a
+                name</small>
+            </div>
+
+            <div class="form-group">
+              <label for="productCategory">Category</label>
+              <input type="text" class="form-control" id="productCategory" required
+                [(ngModel)]="product.productCategory" name="productCategory" #productCategory="ngModel">
+              <small class="form-text text-muted" *ngIf="productCategory.touched && !productCategory.valid">Must belong
+                to
+                some category</small>
+            </div>
+
+            <div class="form-group">
+              <label for="productQuantity">Quantity</label>
+              <input type="number" class="form-control" id="productQuantity" number required
+                [(ngModel)]="product.productQuantity" name="productQuantity" min="1" #productQuantity="ngModel">
+              <small class="form-text text-muted" *ngIf="productQuantity.touched && !productQuantity.valid">Minimum
+                Quantity
+                is 1</small>
+            </div>
+
+            <div class="form-group">
+              <label for="productDescription">Description</label>
+              <input type="text" class="form-control" id="productDescription" required
+                [(ngModel)]="product.productDescription" name="productDescription" #productDescription="ngModel">
+              <small class="form-text text-muted" *ngIf="productDescription.touched && !productDescription.valid">One
+                Liner</small>
+            </div>
+
+            <div class="form-group">
+              <label for="unitPrice">Price</label>
+              <input type="number" class="form-control" id="unitPrice" number required [(ngModel)]="product.unitPrice"
+                name="unitPrice" min="1" #unitPrice="ngModel">
+              <small class="form-text text-muted" *ngIf="unitPrice.touched && !unitPrice.valid">Minimum price is
+                1</small>
+            </div>
+
+            <div class="form-group">
+              <label for="imageUrl">Image URL</label>
+              <input type="text" class="form-control" id="imageUrl" required [(ngModel)]="product.imageUrl"
+                name="imageUrl" #imageUrl="ngModel">
+              <small class="form-text text-muted" *ngIf="imageUrl.touched && !imageUrl.valid">Give a snapshot
+                link</small>
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="!addForm.valid">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+</div>

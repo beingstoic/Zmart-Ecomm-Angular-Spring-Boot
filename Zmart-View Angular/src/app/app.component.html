@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm navbr">
+      <h2 class="my-0 mr-md-auto font-weight-normal">
+        <strong><a [routerLink]="['/home']">
+          <img src="../assets/images/zmart.jpg" alt="logo" class="zmart-logo">
+        </a></strong>
+      </h2>
+      
+    
+        <nav class="my-2 my-md-0 mr-md-3" *ngIf="isLoggedIn && showMerchant">
+          <!-- <a class="p-2 text-dark align-items-left" href="#">Shop</a> -->
+          <a class="p-2 text-light align-items-right" [routerLink]="['/orderby']">Orders</a>
+          <a class="p-2 text-light align-items-right" [routerLink]="['/products']">Manage Products</a>
+          <a class="p-2 text-light align-items-right" (click)="logout()">Logout</a>
+        </nav>
+    
+        <nav class="my-2 my-md-0 mr-md-3" *ngIf="isLoggedIn && showCustomer">
+          <a class="p-2 text-light align-items-right" [routerLink]="['/orders']">Orders</a>
+          <a class="p-2 text-light align-items-right" [routerLink]="['/cart']">Cart</a>
+          <a class="p-2 text-light align-items-right" (click)="logout()">Logout</a>
+
+        </nav>
+    
+       
+      
+            
+          <div class="navbar-nav ml-auto"
+          *ngIf="!isLoggedIn">
+            <a class="p-3 text-light" [routerLink]="['/login']">Login</a>
+          </div>
+          <nav class="my-2 my-md-0 mr-md-3" *ngIf="!isLoggedIn">
+            <a class="p-2 text-light" [routerLink]="['/register']">Register</a>
+    
+           </nav>
+           
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <app-footer></app-footer>
+  </div>
+</div>

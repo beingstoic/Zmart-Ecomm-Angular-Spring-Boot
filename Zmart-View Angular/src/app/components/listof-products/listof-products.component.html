@@ -1,0 +1,41 @@
+<header class="text-center">
+    <h1>Product List</h1>
+</header>
+<div class="row">
+    <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-warning" [routerLink]="['/add']">Add Products here</button>
+    </div>
+<br>
+</div>
+<div class="card rounded shadow border-primary">
+    <div class="card-body p-5 bg-white rounded">
+        <div class="table-responsive">
+            <table id="admin" style="width:100%" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products | async">
+                        <td>{{product.id}}</td>
+                        <td>{{product.productName}}</td>
+                        <td>{{product.productCategory}}</td>
+                        <td>{{product.unitPrice|currency:'INR'}}</td>
+                        <td>{{product.productQuantity}}</td>
+                        <td><button (click)="deleteProduct(product.id)" class="btn btn-danger"
+                                style="width: 89px">Delete</button>
+                            <button (click)="updateProduct(product.id)" class="btn btn-info"
+                                style="width: 89px">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>>
